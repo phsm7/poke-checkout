@@ -2,7 +2,7 @@ import usePokemons from 'context/hooks/usePokemons';
 import { useEffect, useState } from 'react';
 import * as Styled from './styles';
 
-export default function SuccessOrder() {
+export default function CheckoutSuccess() {
   const [imagePokemon, setImagePokemon] = useState('');
   const { getPokemonDetails } = usePokemons();
 
@@ -17,7 +17,7 @@ export default function SuccessOrder() {
 
   return (
     <Styled.Wrapper>
-      <Styled.Title>Parabéns</Styled.Title>
+      <Styled.Title>Parabéns!</Styled.Title>
       <Styled.Text>
         Você acabou de comprar
         <br /> seu Pokémon

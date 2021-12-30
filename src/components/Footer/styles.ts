@@ -14,7 +14,7 @@ const textModifiers = {
 };
 
 export const Wrapper = styled.footer<FooterProps>`
-  ${({ backgroundColor }) => css`
+  ${({ backgroundColor, theme }) => css`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -23,6 +23,9 @@ export const Wrapper = styled.footer<FooterProps>`
     bottom: 0;
     padding-bottom: 2rem;
     background-color: ${backgroundColor ? backgroundColor : 'transparent'};
+    ${theme.media.queryDesktop('1100')} {
+      padding-bottom: 4rem;
+    }
   `}
 `;
 

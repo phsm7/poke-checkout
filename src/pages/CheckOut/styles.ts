@@ -1,24 +1,69 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.section`
-  padding: 2rem 2rem 6rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  form {
+  ${({ theme }) => css`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: auto;
-  }
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2rem 0;
+    ${theme.media.queryDesktop('700')} {
+      padding: 4.6rem 11.7rem 0;
+    }
+  `}
+`;
+
+export const Content = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    ${theme.media.queryDesktop('700')} {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  `}
+`;
+
+export const SuccessImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 32px;
 `;
 
 export const HeadingWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-bottom: 2rem;
 
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    text-decoration-line: underline;
+    :hover {
+      cursor: pointer;
+      transform: scale(108%);
+    }
+  }
+`;
+
+export const HeadingLeftIcon = styled.div`
+  cursor: pointer;
+  :hover {
+    transform: scale(108%);
+  }
   svg {
     margin-right: 1.2rem;
   }
@@ -32,21 +77,44 @@ export const Title = styled.h1`
     font-size: ${theme.font.medium};
     color: ${theme.colors.black};
     margin-bottom: 1.4rem;
+
+    ${theme.media.queryDesktop('700')} {
+      font-size: 28px;
+      margin-bottom: 6.4rem;
+    }
+  `}
+`;
+
+export const CircleWrapper = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    ${theme.media.queryDesktop('700')} {
+      margin-bottom: 6.4rem;
+    }
   `}
 `;
 
 export const OrderWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-top: 2rem;
-  margin-bottom: 2.8rem;
-  width: 31.2rem;
-  height: 10.4rem;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid #c4c4c4;
-  border-radius: 8px;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 1.6rem;
+    width: 31.2rem;
+    height: 10.4rem;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    ${theme.media.queryDesktop('700')} {
+      margin: 0;
+      margin-top: 12px;
+    }
+  `}
 `;
 
 export const OrderTitle = styled.h2`
@@ -84,10 +152,19 @@ export const OrderDescription = styled.div`
 `;
 
 export const Form = styled.form`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 2.4rem;
-  align-items: center;
+  ${({ theme }) => css`
+    grid-gap: 1.2rem;
+    align-items: center;
+    max-width: 31.2rem;
+
+    button {
+      margin-top: 2rem;
+    }
+
+    ${theme.media.queryDesktop('700')} {
+      margin-left: 51px;
+    }
+  `}
 `;
 
 export const SucessImage = styled.img`

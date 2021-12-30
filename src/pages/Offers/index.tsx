@@ -19,16 +19,29 @@ export default function Offers() {
     dots: true,
     infinite: true,
     speed: 3000,
-    slidesToShow: 1,
     initialSlide: 0,
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
     swipeToSlide: true,
-    centerMode: true,
-    centerPadding: '0.4rem',
     arrows: false,
     beforeChange: (nextSlide: number) => setSlideIndex(nextSlide),
+    responsive: [
+      {
+        breakpoint: 4000,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   async function loadPokemons() {
@@ -45,28 +58,26 @@ export default function Offers() {
   return (
     <>
       <BaseTemplate useBackground={!(pokemons.length === 0)}>
-        <Styled.Content>
-          {!(pokemons.length === 0) && (
+        {!(pokemons.length === 0) && (
+          <Styled.Content>
             <>
               <OffersHeading />
               <Styled.SliderWrapper>
                 <Styled.TitleOffers>Escolha seu Pokémon</Styled.TitleOffers>
                 <Slider {...settingsCarousel}>
                   {pokemons &&
-                    pokemons.map(
-                      ({ id, name, image, order }: PokemonsProps) => (
-                        <Card key={id} name={name} image={image}>
-                          <Button
-                            color="yellow"
-                            onClick={() => {
-                              navigate(`/checkout/${name}`);
-                            }}
-                          >
-                            COMPRAR
-                          </Button>
-                        </Card>
-                      )
-                    )}
+                    pokemons.map(({ name, image }: PokemonsProps) => (
+                      <Card key={name} name={name} image={image}>
+                        <Button
+                          color="yellow"
+                          onClick={() => {
+                            navigate(`/checkout/${name}`);
+                          }}
+                        >
+                          COMPRAR
+                        </Button>
+                      </Card>
+                    ))}
                 </Slider>
               </Styled.SliderWrapper>
               <Styled.Description>
@@ -82,8 +93,8 @@ export default function Offers() {
               </Styled.Description>
               <Footer backgroundColor="#e5e5e5" textColor="gray" />
             </>
-          )}
-        </Styled.Content>
+          </Styled.Content>
+        )}
         {pokemons.length === 0 && (
           <>
             <PokemonNotFound />

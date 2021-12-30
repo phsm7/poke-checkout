@@ -2,16 +2,28 @@ import styled, { css } from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Content = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 60vh;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+
+    ${theme.media.queryDesktop('1100')} {
+      height: 100%;
+    }
+  `}
 `;
 
 export const Image = styled.img`
-  width: 104.4px;
-  height: 110.2px;
+  ${({ theme }) => css`
+    width: 104.4px;
+    height: 110.2px;
+    ${theme.media.queryDesktop('1100')} {
+      width: 173px;
+      height: 174px;
+    }
+  `}
 `;
 
 export const Title = styled.h1`
@@ -36,6 +48,9 @@ export const Text = styled.p`
     font-weight: ${theme.font.bold};
     font-size: ${theme.font.sizes.medium};
     margin-top: 2rem;
+    ${theme.media.queryDesktop('1100')} {
+      margin-top: 4rem;
+    }
   `}
 `;
 

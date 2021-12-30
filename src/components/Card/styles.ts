@@ -6,10 +6,12 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 8rem;
     height: 43.42rem;
     width: 30.98rem;
     background-color: ${theme.colors.white};
     border-radius: 3rem;
+    box-shadow: 0px 90px 50px -50px rgba(0, 0, 0, 0.5);
   `}
 `;
 

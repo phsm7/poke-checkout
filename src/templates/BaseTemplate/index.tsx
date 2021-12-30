@@ -12,8 +12,7 @@ export default function BaseTemplate({
 }: TemplateProps) {
   return (
     <Styled.Wrapper image={backgroundImg} useBackground={useBackground}>
-      <Styled.Content>{children}</Styled.Content>
-      {useBackground && <Styled.Overlay />}
+      {children}
     </Styled.Wrapper>
   );
 }
