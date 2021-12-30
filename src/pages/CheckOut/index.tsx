@@ -12,7 +12,8 @@ import CheckoutSuccess from 'components/CheckoutSuccess';
 import usePokemons from 'context/hooks/usePokemons';
 import { PokemonsProps } from 'context/types/Pokemons';
 import * as yup from 'yup';
-
+import paymentIcon from 'assets/payment_icon.svg';
+import paymentIconTwo from 'assets/payment_icon_2.svg';
 type PersonalDataProps = {
   cpf: string;
   phone: string;
@@ -29,6 +30,9 @@ type PaymentDataProps = {
   digit: string;
 };
 
+type PaymentDayProps = '02' | '05' | '10' | '15' | '20';
+
+type PaymentFormProps = 'boleto' | 'debito';
 export default function CheckOut() {
   const navigate = useNavigate();
   const params = useParams();
@@ -36,8 +40,13 @@ export default function CheckOut() {
   const { getPokemonDetails } = usePokemons();
 
   const [step, setStep] = useState(1);
+  const [paymentStep, setPaymentStep] = useState(1);
   const [personalData, setPersonalData] = useState({} as PersonalDataProps);
   const [paymentData, setPaymentData] = useState({} as PaymentDataProps);
+  const [paymentDaySelected, setPaymentDaySelected] =
+    useState<PaymentDayProps>('05');
+  const [paymentFormSelected, setPaymentFormSelected] =
+    useState<PaymentFormProps>('boleto');
 
   const [imagePikachu, setImagePikachu] = useState('');
 
@@ -69,15 +78,31 @@ export default function CheckOut() {
     if (params.name !== undefined) {
       loadDetails(params.name);
     }
+    const sessionStep = JSON.parse(
+      sessionStorage.getItem('@mobi2buy/checkout/step')!
+    );
+
+    if (sessionStep) {
+      setStep(parseInt(sessionStep));
+    }
   }, [params.name]);
 
   function handlePersonalDataSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStep((state) => state + 1);
+    sessionStorage.setItem('@mobi2buy/checkout/step', JSON.stringify(2));
   }
   function handlePaymentSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setPaymentStep((state) => state + 1);
+  }
+  function handlePaymentDay(event: React.MouseEvent) {
+    event.preventDefault();
+    if (!paymentDaySelected) {
+      return;
+    }
     setStep((state) => state + 1);
+    sessionStorage.setItem('@mobi2buy/checkout/step', JSON.stringify(3));
   }
   return (
     <>
@@ -199,51 +224,163 @@ export default function CheckOut() {
               </Styled.Form>
             )}
             {step === 2 && (
-              <Styled.Form onSubmit={(event) => handlePaymentSubmit(event)}>
-                <Input
-                  width="large"
-                  type="text"
-                  name="Banco"
-                  label="Banco"
-                  value={paymentData.bank}
-                  onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-                    setPaymentData({ ...paymentData, bank: target.value })
-                  }
-                />
-                <Input
-                  width="large"
-                  type="text"
-                  name="agency"
-                  label="Agência (sem dígito)"
-                  value={paymentData.agency}
-                  onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-                    setPaymentData({ ...paymentData, agency: target.value })
-                  }
-                />
-                <Input
-                  width="large"
-                  type="text"
-                  name="account"
-                  label="Número Conta corrente"
-                  value={paymentData.account}
-                  onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-                    setPaymentData({ ...paymentData, account: target.value })
-                  }
-                />
-                <Input
-                  width="large"
-                  type="text"
-                  name="digit"
-                  label="Dígito da conta corrente"
-                  value={paymentData.digit}
-                  onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-                    setPaymentData({ ...paymentData, digit: target.value })
-                  }
-                />
-                <Button size="large" color="gray" type="submit">
-                  CONTINUAR
-                </Button>
-              </Styled.Form>
+              <Styled.PaymentWrapper>
+                <Styled.AddressWrapper>
+                  <Styled.CepData>
+                    <span>CEP: 22345-678</span>
+                    <p>Alterar</p>
+                  </Styled.CepData>
+                  <Styled.AddressData>
+                    <span>
+                      Rua Conde de Bonfim
+                      <br /> Tijuca
+                      <br /> Rio de Janeiro - RJ
+                    </span>
+                    <p>Alterar</p>
+                  </Styled.AddressData>
+                </Styled.AddressWrapper>
+                <Styled.PaymentOptionWrapper>
+                  <Styled.PaymentOption
+                    selected={paymentFormSelected === 'debito'}
+                    onClick={() => {
+                      setPaymentFormSelected('debito');
+                    }}
+                  >
+                    <img
+                      src={paymentIcon}
+                      alt="imagem de um simbolo monetário"
+                    />
+                    <span>Débito em conta</span>
+                  </Styled.PaymentOption>
+                  <Styled.PaymentOption
+                    selected={paymentFormSelected === 'boleto'}
+                    onClick={() => {
+                      setPaymentFormSelected('boleto');
+                    }}
+                  >
+                    <img
+                      src={paymentIconTwo}
+                      alt="imagem de um simbolo monetário"
+                    />
+                    <span>Boleto bancário</span>
+                  </Styled.PaymentOption>
+                </Styled.PaymentOptionWrapper>
+                {paymentStep === 1 && (
+                  <Styled.Form onSubmit={(event) => handlePaymentSubmit(event)}>
+                    <Input
+                      width="large"
+                      type="text"
+                      name="Banco"
+                      label="Banco"
+                      value={paymentData.bank}
+                      onChange={({
+                        target,
+                      }: React.ChangeEvent<HTMLInputElement>) =>
+                        setPaymentData({ ...paymentData, bank: target.value })
+                      }
+                    />
+                    <Input
+                      width="large"
+                      type="text"
+                      name="agency"
+                      label="Agência (sem dígito)"
+                      value={paymentData.agency}
+                      onChange={({
+                        target,
+                      }: React.ChangeEvent<HTMLInputElement>) =>
+                        setPaymentData({
+                          ...paymentData,
+                          agency: target.value,
+                        })
+                      }
+                    />
+                    <Input
+                      width="large"
+                      type="text"
+                      name="account"
+                      label="Número Conta corrente"
+                      value={paymentData.account}
+                      onChange={({
+                        target,
+                      }: React.ChangeEvent<HTMLInputElement>) =>
+                        setPaymentData({
+                          ...paymentData,
+                          account: target.value,
+                        })
+                      }
+                    />
+                    <Input
+                      width="large"
+                      type="text"
+                      name="digit"
+                      label="Dígito da conta corrente"
+                      value={paymentData.digit}
+                      onChange={({
+                        target,
+                      }: React.ChangeEvent<HTMLInputElement>) =>
+                        setPaymentData({
+                          ...paymentData,
+                          digit: target.value,
+                        })
+                      }
+                    />
+                    <Button size="large" color="gray" type="submit">
+                      CONTINUAR
+                    </Button>
+                  </Styled.Form>
+                )}
+
+                {paymentStep === 2 && (
+                  <>
+                    <Styled.SelectDayWrapper>
+                      <h1>Dia do vencimento</h1>
+                      <Styled.SelectDayItems>
+                        <Styled.SelectDayItem
+                          selected={paymentDaySelected === '02'}
+                          onClick={() => setPaymentDaySelected('02')}
+                        >
+                          <span>02</span>
+                        </Styled.SelectDayItem>
+                        <Styled.SelectDayItem
+                          selected={paymentDaySelected === '05'}
+                          onClick={() => setPaymentDaySelected('05')}
+                        >
+                          <span>05</span>
+                        </Styled.SelectDayItem>
+                        <Styled.SelectDayItem
+                          selected={paymentDaySelected === '10'}
+                          onClick={() => setPaymentDaySelected('10')}
+                        >
+                          <span>10</span>
+                        </Styled.SelectDayItem>
+                        <Styled.SelectDayItem
+                          selected={paymentDaySelected === '15'}
+                          onClick={() => setPaymentDaySelected('15')}
+                        >
+                          <span>15</span>
+                        </Styled.SelectDayItem>
+                        <Styled.SelectDayItem
+                          selected={paymentDaySelected === '20'}
+                          onClick={() => setPaymentDaySelected('20')}
+                        >
+                          <span>20</span>
+                        </Styled.SelectDayItem>
+                      </Styled.SelectDayItems>
+                    </Styled.SelectDayWrapper>
+
+                    <Button
+                      size="large"
+                      color="gray"
+                      type="button"
+                      onClick={(event: React.MouseEvent) =>
+                        handlePaymentDay(event)
+                      }
+                    >
+                      CONTINUAR
+                    </Button>
+                  </>
+                )}
+              </Styled.PaymentWrapper>
             )}
             {step === 3 && <CheckoutSuccess />}
           </Styled.Content>

@@ -8,10 +8,12 @@ export type ButtonProps = {
   color?: 'yellow' | 'blue' | 'gray';
   margin?: string;
   withBorder?: boolean;
+  type?: string;
 } & ButtonTypes;
 
 const Button = ({
   children,
+  type = 'button',
   size = 'normal',
   color = 'yellow',
   margin = '0',
@@ -21,6 +23,7 @@ const Button = ({
   return (
     <Styled.Wrapper
       {...props}
+      type={type}
       size={size}
       color={color}
       withBorder={withBorder}
