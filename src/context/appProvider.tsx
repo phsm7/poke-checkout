@@ -1,4 +1,5 @@
 import React from 'react';
+import { CheckoutProvider } from './provider/Checkout';
 import { PokemonsProvider } from './provider/Pokemons';
 
 type AppProviderProps = {
@@ -6,7 +7,11 @@ type AppProviderProps = {
 };
 
 const AppProvider = ({ children }: AppProviderProps) => {
-  return <PokemonsProvider>{children}</PokemonsProvider>;
+  return (
+    <PokemonsProvider>
+      <CheckoutProvider>{children}</CheckoutProvider>
+    </PokemonsProvider>
+  );
 };
 
 export default AppProvider;

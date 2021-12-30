@@ -1,3 +1,5 @@
+import { SetStateAction } from 'react';
+
 export type PokemonsProviderProps = {
   children: React.ReactNode;
 };
@@ -7,6 +9,8 @@ export type PokemonsTypes = {
   getPokemons: (next: string) => void;
   next: string;
   getPokemonDetails: (name: string) => Promise<PokemonsProps>;
+  step: number;
+  setStep: React.Dispatch<SetStateAction<number>>;
 };
 
 export type PokemonResultsProps = {

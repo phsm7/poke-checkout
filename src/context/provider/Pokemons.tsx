@@ -11,6 +11,7 @@ const PokemonsContext = createContext({} as PokemonsTypes);
 const PokemonsProvider = ({ children }: PokemonsProviderProps) => {
   const [pokemons, setPokemons] = useState([]);
   const [next, setNext] = useState('');
+  const [step, setStep] = useState(1);
 
   const getPokemons = useCallback(async (next: string) => {
     const { data } = await Pokemons.all(
@@ -40,6 +41,8 @@ const PokemonsProvider = ({ children }: PokemonsProviderProps) => {
         getPokemons,
         getPokemonDetails,
         next,
+        step,
+        setStep,
       }}
     >
       {children}
