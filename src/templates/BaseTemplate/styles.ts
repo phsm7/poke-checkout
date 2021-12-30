@@ -10,10 +10,14 @@ const wrapperModifiers = {
     background-color: ${theme.colors.white};
     padding: 0;
   `,
-  withBackground: (image: string) => css`
+  withBackground: (theme: DefaultTheme, image: string) => css`
     background: url(${image}) no-repeat;
     background-size: cover;
     background-position-x: right;
+
+    ${theme.media.queryDesktop('700')} {
+      background-position-x: center;
+    }
   `,
 };
 
@@ -28,30 +32,7 @@ export const Wrapper = styled.div<WithBackgroundProps>`
     height: 100%;
     width: 100%;
 
-    ${useBackground && wrapperModifiers['withBackground'](image)};
+    ${useBackground && wrapperModifiers['withBackground'](theme, image)};
     ${!useBackground && wrapperModifiers['white'](theme)};
   `}
 `;
-
-// export const Overlay = styled.div`
-//   ${({ theme }) => css`
-//     ${theme.media.query('700')} {
-//       background: rgba(0, 0, 0, 0.3);
-//       position: absolute;
-//       top: 0;
-//       right: 0;
-//       bottom: 0;
-//       left: 0;
-//       z-index: 99;
-//     }
-//   `}
-// `;
-
-// export const Content = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   height: 100%;
-//   width: 100%;
-//   z-index: 999;
-// `;
