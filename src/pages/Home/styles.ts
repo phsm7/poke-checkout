@@ -36,7 +36,23 @@ export const Title = styled.h1`
 `;
 
 export const Content = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 0.8rem;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 0.8rem;
+    input {
+      height: 4.8rem;
+      width: 25rem;
+      background: ${theme.colors.white};
+      font-size: ${theme.font.sizes.medium};
+      color: ${theme.colors.black};
+      border: none;
+      border-radius: 8px;
+      padding-left: 2rem;
+      ::placeholder {
+        font-size: ${theme.font.sizes.medium};
+        color: ${theme.colors.black};
+      }
+    }
+  `}
 `;

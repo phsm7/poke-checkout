@@ -37,8 +37,8 @@ export default function Home() {
         <Zoom>
           <Styled.Content>
             <Styled.Title>Pokémon pra vc</Styled.Title>
-            <Input type="text" width="medium" placeholder="Telefone" />
-            <Input type="text" width="medium" placeholder="Cidade" />
+            <input type="text" width="medium" placeholder="Telefone" />
+            <input type="text" width="medium" placeholder="Cidade" />
             <Button
               type="submit"
               size="normal"
