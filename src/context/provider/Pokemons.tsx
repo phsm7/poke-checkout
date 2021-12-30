@@ -16,8 +16,6 @@ const PokemonsProvider = ({ children }: PokemonsProviderProps) => {
     const { data } = await Pokemons.all(
       next.replace('https://pokeapi.co/api/v2/pokemon', '')
     );
-
-    console.log(data);
     setNext(data.next);
     setPokemons(data.results);
   }, []);
