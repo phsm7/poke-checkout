@@ -131,7 +131,13 @@ export const OrderTitle = styled.h2`
   height: 40px;
 `;
 
-export const PaymentWrapper = styled.div``;
+export const PaymentWrapper = styled.div`
+  ${({ theme }) => css`
+    ${theme.media.queryDesktop('700')} {
+      margin-left: 51px;
+    }
+  `}
+`;
 
 export const OrderDescription = styled.div`
   display: flex;
@@ -164,10 +170,6 @@ export const Form = styled.form`
       margin-top: 2rem;
       margin-bottom: 2.8rem;
     }
-
-    ${theme.media.queryDesktop('700')} {
-      margin-left: 51px;
-    }
   `}
 `;
 
@@ -181,6 +183,7 @@ export const AddressWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 31.2rem;
   height: 10rem;
   margin-bottom: 2.4rem;
 `;
@@ -224,6 +227,7 @@ export const PaymentOptionWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  max-width: 31.2rem;
   margin-bottom: 1.4rem;
 `;
 type PaymentOptionProps = {
