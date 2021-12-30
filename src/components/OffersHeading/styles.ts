@@ -26,3 +26,11 @@ export const Wrapper = styled.div`
     }
   `}
 `;
+
+export const LeftContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 23rem;
+`;

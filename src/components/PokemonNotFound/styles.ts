@@ -1,10 +1,27 @@
 import styled, { css } from 'styled-components';
 
-export const NotFoundWrapper = styled.div``;
+export const NotFoundWrapper = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    ${theme.media.queryDesktop('1100')} {
+      margin-bottom: 8rem;
+    }
+  `}
+`;
 
 export const Image = styled.img`
-  width: 127.6px;
-  height: 110.6px;
+  ${({ theme }) => css`
+    width: 127.6px;
+    height: 110.6px;
+    ${theme.media.queryDesktop('1100')} {
+      width: 146.2px;
+      height: 127px;
+    }
+  `}
 `;
 
 export const Title = styled.h1`
@@ -21,6 +38,9 @@ export const Title = styled.h1`
 
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #000000;
+    ${theme.media.queryDesktop('1100')} {
+      margin-bottom: 5.6rem;
+    }
   `}
 `;
 

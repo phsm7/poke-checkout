@@ -2,9 +2,6 @@ import styled, { css, DefaultTheme } from 'styled-components';
 import { InputProps } from '.';
 
 const wrapperModifiers = {
-  warning: (theme: DefaultTheme) => css`
-    border-bottom: 2px solid ${theme.colors.red};
-  `,
   error: (theme: DefaultTheme) => css`
     border-bottom: 2px solid ${theme.colors.red};
   `,
@@ -32,46 +29,90 @@ const sizeModifiers = {
     `,
 };
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
+  padding-top: 1.2rem;
   width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
   position: relative;
+  overflow: hidden;
 `;
 
 export const Label = styled.label`
   ${({ theme }) => css`
-    color: ${theme.colors.grayDark};
-    font-weight: ${theme.font.regular};
-    font-style: normal;
+    position: absolute;
+    left: 1.6rem;
+    bottom: 1rem;
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
     font-size: ${theme.font.sizes.small};
+    font-family: ${theme.font.sizes.medium};
+    color: ${theme.colors.black};
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    span {
+      background: #fff;
+      padding: 0 4px;
+    }
+
+    .content__name {
+      position: absolute;
+      bottom: 0.5rem;
+      transition: all 0.3s ease-in-out;
+      /* text-transform: uppercase; */
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      bottom: -1px;
+      transform: translateY(-100%);
+      transition: all 0.5s ease-in-out;
+    }
   `}
 `;
-
 export const Input = styled.input<InputProps>`
-  ${({ theme, width, error }) => css`
+  ${({ theme, width, errorMessage }) => css`
     border-radius: 8px 8px 0px 0px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #484848;
     height: 4.8rem;
     padding-left: 2rem;
     background: ${theme.colors.white};
-
     font-weight: ${theme.font.regular};
     font-size: ${theme.font.sizes.medium};
     font-style: normal;
+    width: 100%;
+
+    ${width == 'medium' && sizeModifiers.medium(theme)};
+    ${!!errorMessage && wrapperModifiers.error(theme)};
 
     ::placeholder {
-      color: ${theme.colors.black};
+      color: transparent;
     }
-    ${width == 'medium' && sizeModifiers.medium(theme)};
-    ${error && wrapperModifiers.error(theme)};
+
+    &:focus + ${Label} .content__name,
+    &:not(:placeholder-shown) + ${Label} .content__name {
+      transform: translateY(-150%);
+      left: 0;
+      font-size: 1.4rem;
+    }
+
+    &:focus + ${Label}::after, &:not(:placeholder-shown) + ${Label}::after {
+      transform: translateX(0);
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 ${theme.spacings.small} ${theme.colors.white}
+        inset;
+      filter: none;
+      &::first-line {
+        font-family: 'Roboto';
+        font-size: ${theme.font.sizes.medium};
+      }
+    }
   `}
 `;
 
@@ -97,13 +138,4 @@ export const Error = styled.p`
     margin-top: 0.4rem;
   `}
 `;
-export const Warning = styled.p`
-  ${({ theme }) => css`
-    color: #727272;
-    font-size: 12px;
-
-    font-weight: ${theme.font.regular};
-
-    margin-top: 0.4rem;
-  `}
-`;
+export const InputWrapper = styled.div``;

@@ -1,8 +1,16 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.section`
-  height: 100%;
-  padding: 4.6rem 5.4rem;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 4.6rem 5.4rem;
+    ${theme.media.queryDesktop('1100')} {
+      justify-content: center;
+    }
+  `}
 `;
 
 export const Image = styled.img`
@@ -21,7 +29,7 @@ export const Title = styled.h1`
     font-style: normal;
     text-align: center;
     margin-top: 1rem;
-
+    margin-bottom: 2rem;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #000000;
   `}

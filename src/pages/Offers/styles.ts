@@ -1,11 +1,16 @@
 import styled, { css } from 'styled-components';
 
 export const Content = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding-top: 1rem;
-  height: auto;
-  width: 100%;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    height: 100vh;
+    width: 100%;
+    ${theme.media.queryDesktop('700')} {
+      padding-top: 4rem;
+    }
+  `}
 `;
 
 export const Image = styled.img`
@@ -46,17 +51,38 @@ export const TitleOffers = styled.h1`
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.bold};
     margin: 2rem 0;
+    ${theme.media.queryDesktop('700')} {
+      font-size: ${theme.font.sizes.xxlarge};
+    }
   `}
 `;
 export const SliderWrapper = styled.div`
   ${({ theme }) => css`
-    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
     height: 92.8vh;
+    ${theme.media.queryDesktop('700')} {
+      justify-content: space-around;
+      align-content: center;
+      width: 100%;
+      height: auto;
+      min-height: 77vh;
+      margin: 0 auto;
+    }
+
+    .slick-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     .slick-dots {
-      transform: translateY(2rem);
+      transform: translateY(-5rem);
       justify-content: space-between;
       width: 100%;
+      ${theme.media.queryDesktop('1100')} {
+        transform: translateY(4rem);
+      }
     }
     .slick-dots li button:before {
       width: 12px;
@@ -86,6 +112,7 @@ export const Description = styled.div`
     background: ${theme.colors.grayLightx};
     width: 100%;
     padding: 25.5px 24px;
+    height: 100%;
 
     ${Title} {
       font-family: 'Roboto';
@@ -99,6 +126,18 @@ export const Description = styled.div`
       font-weight: ${theme.font.regular};
       font-style: normal;
       text-align: left;
+      max-width: 70.5rem;
+      margin: 0 auto;
+    }
+
+    ${theme.media.queryDesktop('500')} {
+      padding-top: 5rem;
+      padding-bottom: 9rem;
+
+      ${Title} {
+        font-size: 22px;
+        margin: 0 auto 4.5rem;
+      }
     }
   `}
 `;

@@ -3,12 +3,12 @@ import { ButtonProps } from '.';
 
 const buttonModifiers = {
   normal: () => css`
-    width: 245px;
-    height: 52px;
+    width: 24.5rem;
+    height: 5.2rem;
   `,
   large: () => css`
-    width: 300px;
-    height: 4rem;
+    width: 31.2rem;
+    height: 5.2rem;
   `,
   yellow: (theme: DefaultTheme) => css`
     background-color: ${theme.colors.yellow};

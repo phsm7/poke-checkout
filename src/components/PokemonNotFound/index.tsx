@@ -31,7 +31,7 @@ export default function PokemonNotFound() {
         <Button
           size="normal"
           color="blue"
-          margin="8.1rem 0 0 0"
+          margin="4.8rem 0 0 0"
           onClick={() => getPokemons(next)}
         >
           TENTE DE NOVO

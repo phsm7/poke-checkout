@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
   height: 100%;
@@ -26,20 +26,22 @@ export const Title = styled.h1`
     text-align: center;
     width: 100%;
     margin: 0 auto 0.9rem;
+    text-transform: uppercase;
+    ${theme.media.queryDesktop('700')} {
+      font-size: 42px;
+    }
   `}
 `;
 
 export const Text = styled.p`
-  ${({ theme }) => css`
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    text-align: center;
-    font-style: normal;
-    width: 100%;
-    color: #107510;
-    margin: 0 auto 2.4rem;
-  `}
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  text-align: center;
+  font-style: normal;
+  width: 100%;
+  color: #107510;
+  margin: 0 auto 2.4rem;
 `;
 
 export const Description = styled.p`
