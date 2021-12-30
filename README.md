@@ -1,46 +1,82 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Poke Api
 
-## Available Scripts
+Aplicação para consumo dinâmico da api PokeApi (https://pokeapi.co/) onde simula o checkout de um e-commerce com fluxo de formulário através da seleção de um dos Pokemons exibidos.
 
-In the project directory, you can run:
 
-### `yarn start`
+## Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Listagem de Pokemons
+- Checkout do Pokemon selecionado
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pilha de Tecnologia
 
-### `yarn build`
+**Bibliotecas:** React, Typescript, Prettier, Eslint, React Router Dom, Styled Components, Yup, Axios, React Icons, React Slick, React Reveal.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Diretórios do Projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Color             | Descrição                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Assets | Arquivos de fontes e imagens estáticas |
+| Components | Centralização de todos os componentes da aplicação |
+| Context | Gerenciamento de estado da aplicação |
+| Hooks | Hooks reutilizáveis |
+| Pages | Páginas da aplicação |
+| Routes | Configuração das rotas |
+| Service | Serviços externos da aplicação ( Conexão com PokeApi ) |
+| Style | Arquivos de estilos globais e tema da aplicação |
+| Templates | Base do Template da aplicação |
+| Types | Tipagem das bibliotecas |
+| Utils | Todo tipo de arquivo util para a aplicação (ex: máscaras de inputs e validações) |
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Executar Localmente
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Clone o projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+  git clone https://github.com/phsm7/teste-react-mobi2buy-pedro.git
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Acesse o diretório do projeto
 
-## Learn More
+```bash
+  cd teste-react-mobi2buy-pedro
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Instale as dependências
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  yarn
+```
+
+Inicie o servidor
+
+```bash
+  yarn start
+```
+
+
+## Rotas da Aplicação
+
+#### Baseurl
+
+```http
+  http://localhost:3000
+```
+
+| Rota| Description                |
+| :-------- | :------------------------- |
+| `/` | Página Inicial |
+| `/ofertas` | Página de Ofertas |
+| `/checkout/:pokemon` | Página de Checkout |
+| `*` | Página 404 - Não encontrado |
+
+
+## Feedback
+
+Caso tenha comentários ou sugestões, entre em contato comigo pelo e-mail pedrohsmachado77@gmail.com
+
