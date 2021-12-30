@@ -6,6 +6,7 @@ export type InputProps = {
   errorMessage?: string;
   width?: 'medium' | 'large';
   type?: string;
+  validationOk?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = ({
@@ -13,6 +14,7 @@ export const Input = ({
   errorMessage = '',
   width = 'medium',
   type = 'text',
+  validationOk = false,
   ...props
 }: InputProps) => {
   return (
@@ -25,12 +27,14 @@ export const Input = ({
             type={type}
             width={width}
             errorMessage={errorMessage}
+            autoComplete="off"
           />
           <Styled.Label>
             <span className="content__name">{label}</span>
           </Styled.Label>
         </Styled.InputWrapper>
       </Styled.Container>
+      {validationOk && <Styled.ValidationOk>{}</Styled.ValidationOk>}
       {!!errorMessage && <Styled.Error>{errorMessage}</Styled.Error>}
     </>
   );

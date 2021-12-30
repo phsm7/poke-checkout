@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    ${theme.media.queryDesktop('700')} {
+      justify-content: space-between;
+      padding: 0 117px;
+    }
 
     h1 {
       font-family: 'PokemonSolid';

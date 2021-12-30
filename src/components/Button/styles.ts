@@ -26,12 +26,10 @@ const buttonModifiers = {
     -webkit-box-shadow: inset 0 -16px 10px #3662ce;
     box-shadow: inset 0 -16px 10px #3662ce;
   `,
-  gray: (theme: DefaultTheme) => css`
+  gray: () => css`
     background: #dfdfdf;
-    cursor: not-allowed;
     border: none;
     color: #9d9d9d;
-    pointer-events: 'none';
     -moz-box-shadow: inset 0 -0 0 #dfdfdf;
     -webkit-box-shadow: inset 0 0 0 #dfdfdf;
     box-shadow: inset 0 0 0 #dfdfdf; ;

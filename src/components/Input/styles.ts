@@ -86,6 +86,10 @@ export const Input = styled.input<InputProps>`
     font-style: normal;
     width: 100%;
 
+    &:focus {
+      border-bottom: 2px solid #ffa000;
+    }
+
     ${width == 'medium' && sizeModifiers.medium(theme)};
     ${!!errorMessage && wrapperModifiers.error(theme)};
 
@@ -140,3 +144,9 @@ export const Error = styled.p`
   `}
 `;
 export const InputWrapper = styled.div``;
+
+export const ValidationOk = styled(Error)`
+  ${({ theme }) => css`
+    color: ${theme.colors.gray};
+  `}
+`;

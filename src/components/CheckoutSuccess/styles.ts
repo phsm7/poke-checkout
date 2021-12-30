@@ -9,6 +9,7 @@ export const Wrapper = styled.section`
   height: 100%;
   width: 100%;
   padding-top: 3.4rem;
+  margin-bottom: 3rem;
 `;
 
 export const Image = styled.img`
