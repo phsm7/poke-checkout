@@ -10,25 +10,28 @@ export type InputProps = {
 
 export const Input = ({
   label = 'Default Label',
-  errorMessage = 'Valor inválido',
+  errorMessage = '',
   width = 'medium',
   type = 'text',
   ...props
 }: InputProps) => {
   return (
-    <Styled.Container>
-      <Styled.InputWrapper>
-        <Styled.Input
-          {...props}
-          placeholder="nao remover esse placeholder"
-          type={type}
-          width={width}
-        />
-        <Styled.Label>
-          <span className="content__name">{label}</span>
-        </Styled.Label>
-      </Styled.InputWrapper>
-    </Styled.Container>
-    // {error && <Styled.Error>{errorMessage}</Styled.Error>}
+    <>
+      <Styled.Container>
+        <Styled.InputWrapper>
+          <Styled.Input
+            {...props}
+            placeholder="nao remover esse placeholder"
+            type={type}
+            width={width}
+            errorMessage={errorMessage}
+          />
+          <Styled.Label>
+            <span className="content__name">{label}</span>
+          </Styled.Label>
+        </Styled.InputWrapper>
+      </Styled.Container>
+      {!!errorMessage && <Styled.Error>{errorMessage}</Styled.Error>}
+    </>
   );
 };

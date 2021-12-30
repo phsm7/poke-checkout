@@ -136,6 +136,7 @@ export const Error = styled.p`
     font-weight: ${theme.font.regular};
 
     margin-top: 0.4rem;
+    margin-left: 1.6rem;
   `}
 `;
 export const InputWrapper = styled.div``;

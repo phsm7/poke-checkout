@@ -11,9 +11,14 @@ import Button from 'components/Button';
 import CheckoutSuccess from 'components/CheckoutSuccess';
 import usePokemons from 'context/hooks/usePokemons';
 import { PokemonsProps } from 'context/types/Pokemons';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 import paymentIcon from 'assets/payment_icon.svg';
 import paymentIconTwo from 'assets/payment_icon_2.svg';
+import {
+  FormErrors,
+  getValidationErrors,
+} from 'utils/validations/getValidationErrors';
+import { checkoutPersonalDataValidation } from 'utils/validations/checkoutPersonalDataValidation';
 type PersonalDataProps = {
   cpf: string;
   phone: string;
@@ -38,6 +43,7 @@ export default function CheckOut() {
   const params = useParams();
   const [details, setDetails] = useState<PokemonsProps>({} as PokemonsProps);
   const { getPokemonDetails } = usePokemons();
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const [step, setStep] = useState(1);
   const [paymentStep, setPaymentStep] = useState(1);
@@ -49,16 +55,6 @@ export default function CheckOut() {
     useState<PaymentFormProps>('boleto');
 
   const [imagePikachu, setImagePikachu] = useState('');
-
-  const schemaPersonalData = yup.object().shape({
-    name: yup.string().required(),
-    age: yup.number().required().positive().integer(),
-    email: yup.string().email(),
-    website: yup.string().url(),
-    createdOn: yup.date().default(function () {
-      return new Date();
-    }),
-  });
 
   async function loadImagePikachu() {
     const response = await getPokemonDetails('pikachu');
@@ -87,8 +83,18 @@ export default function CheckOut() {
     }
   }, [params.name]);
 
-  function handlePersonalDataSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handlePersonalDataSubmit(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
+
+    const validationErrors = await checkoutPersonalDataValidation(personalData);
+
+    if (validationErrors) {
+      setErrors(validationErrors ? validationErrors : {});
+      return;
+    }
+
     setStep((state) => state + 1);
     sessionStorage.setItem('@mobi2buy/checkout/step', JSON.stringify(2));
   }
@@ -157,7 +163,9 @@ export default function CheckOut() {
                   type="text"
                   name="cpf"
                   label="CPF"
+                  placeholder="xxx.xxx.xxx-xx"
                   value={personalData.cpf}
+                  errorMessage={errors.cpf}
                   onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
                     setPersonalData({
                       ...personalData,
@@ -170,6 +178,7 @@ export default function CheckOut() {
                   type="text"
                   name="phone"
                   label="Telefone"
+                  errorMessage={errors.phone}
                   value={personalData.phone}
                   onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
                     setPersonalData({ ...personalData, phone: target.value })
@@ -180,6 +189,7 @@ export default function CheckOut() {
                   type="text"
                   name="email"
                   label="Seu e-mail"
+                  errorMessage={errors.email}
                   value={personalData.email}
                   onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
                     setPersonalData({ ...personalData, email: target.value })
@@ -189,6 +199,7 @@ export default function CheckOut() {
                   width="large"
                   type="text"
                   name="rg"
+                  errorMessage={errors.rg}
                   label="Número da sua identidade"
                   value={personalData.rg}
                   onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
@@ -199,6 +210,7 @@ export default function CheckOut() {
                   width="large"
                   type="text"
                   name="birthday"
+                  errorMessage={errors.birthday}
                   label="Data de nascimento"
                   value={personalData.birthday}
                   onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
@@ -209,6 +221,7 @@ export default function CheckOut() {
                   width="large"
                   type="text"
                   name="motherName"
+                  errorMessage={errors.motherName}
                   label="Nome completo da sua mãe"
                   value={personalData.motherName}
                   onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
