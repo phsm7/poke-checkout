@@ -7,7 +7,7 @@ export const Content = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    height: 100%;
 
     ${theme.media.queryDesktop('1100')} {
       height: 100%;

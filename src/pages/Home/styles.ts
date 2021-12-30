@@ -6,7 +6,7 @@ export const Wrapper = styled.section`
     flex-direction: column;
     align-items: center;
     height: 100%;
-    padding: 4.6rem 5.4rem;
+    padding: 4rem 5rem;
     ${theme.media.queryDesktop('1100')} {
       justify-content: center;
     }
@@ -14,7 +14,6 @@ export const Wrapper = styled.section`
 `;
 
 export const Image = styled.img`
-  margin-top: 2rem;
   width: 128px;
   height: 119px;
 `;

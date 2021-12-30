@@ -8,6 +8,7 @@ export const Content = styled.section`
     height: 100vh;
     width: 100%;
     ${theme.media.queryDesktop('700')} {
+      height: 100%;
       padding-top: 4rem;
     }
   `}

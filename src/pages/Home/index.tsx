@@ -7,11 +7,14 @@ import usePokemons from 'context/hooks/usePokemons';
 import { FormEvent, useEffect, useState } from 'react';
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
-import { Input } from 'components/Input';
+import { HomeProps } from 'context/types/HomeTypes';
+import { phoneMask } from 'utils/masks/phoneMask';
+import { stringMask } from 'utils/masks/stringMask';
 
 export default function Home() {
   const navigate = useNavigate();
   const [imagePikachu, setImagePikachu] = useState('');
+  const [data, setData] = useState<HomeProps>({} as HomeProps);
   const { getPokemonDetails } = usePokemons();
 
   async function loadImage() {
@@ -23,9 +26,9 @@ export default function Home() {
     loadImage();
   }, []);
 
-  const handleNext = (ev: FormEvent) => {
-    ev.preventDefault();
-    navigate('/404');
+  const handleNext = (event: FormEvent) => {
+    event.preventDefault();
+    navigate('/ofertas');
   };
 
   return (
@@ -37,18 +40,34 @@ export default function Home() {
         <Zoom>
           <Styled.Content>
             <Styled.Title>Pokémon pra vc</Styled.Title>
-            <input type="text" width="medium" placeholder="Telefone" />
-            <input type="text" width="medium" placeholder="Cidade" />
-            <Button
-              type="submit"
-              size="normal"
-              color="yellow"
-              margin="8rem 0 0 0"
-              onClick={handleNext}
-            >
-              ENTRAR
-            </Button>
+            <input
+              type="text"
+              width="medium"
+              placeholder="Telefone"
+              value={data.phone}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setData({ ...data, phone: phoneMask(event.target.value) });
+              }}
+            />
+            <input
+              type="text"
+              width="medium"
+              placeholder="Cidade"
+              value={data.city}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setData({ ...data, city: stringMask(event.target.value) });
+              }}
+            />
           </Styled.Content>
+          <Button
+            type="submit"
+            size="normal"
+            color="yellow"
+            margin="8rem 0 0"
+            onClick={handleNext}
+          >
+            ENTRAR
+          </Button>
         </Zoom>
       </Styled.Wrapper>
 
