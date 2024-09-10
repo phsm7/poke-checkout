@@ -78,5 +78,5 @@ Inicie o servidor
 
 ## Feedback
 
-Caso tenha comentários ou sugestões, entre em contato comigo pelo e-mail pedrohsmachado77@gmail.com
+Caso tenha comentários ou sugestões, entre em contato comigo pelo e-mail p7dev.technology@gmail.com
 
