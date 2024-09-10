@@ -38,13 +38,13 @@ Aplicação para consumo dinâmico da api PokeApi (https://pokeapi.co/) onde sim
 Clone o projeto
 
 ```bash
-  git clone https://github.com/phsm7/teste-react-mobi2buy-pedro.git
+  git clone https://github.com/phsm7/poke-checkout.git
 ```
 
 Acesse o diretório do projeto
 
 ```bash
-  cd teste-react-mobi2buy-pedro
+  cd poke-checkout
 ```
 
 Instale as dependências
